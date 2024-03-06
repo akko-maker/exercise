@@ -1,0 +1,1188 @@
+@charset "utf-8";
+
+/* *************************** */
+/* ◎ ブレイクポイント : 最小768px / 最大1140px
+(320px - 767px : スマホデザインで可変サイズ)
+@media screen and (max-width:320px) and(min-width:767px;){}
+(768px以上 : PCデザインで可変サイズ)
+@media screen and (min-width:768px;){}
+(1140px以上 : PCデザインで固定サイズ) */
+/* @media screen and (min-width:1140px){} */
+/* *************************** */
+
+/* レスポンシブにするために、サイズ指定や単位を見直す */
+
+/* フォントサイズ指定単位をremに変更。
+ブラウザのフォントの初期値が16pxのままだと、10px＝0.625remとなるが、扱いづらいので
+1remが10px、16pxは1.6remとなるように、htmlにフォントサイズを62.5%を指定 */
+/* ページトップへ戻るやページ内リンクがスムーズに動くようにscroll-behavior: smooth指定*/
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+/* imgはブロック要素として扱う */
+img {
+  display: block;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif,
+    'Noto Serif JP', serif;
+  font-size: 1.6rem;
+  color: #333;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+
+.body_inner {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+/* ul,liの元スタイルをなしにする*/
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/***********************************/
+/*          header ヘッダー        */
+/***********************************/
+/* ヘッダーロゴ モバイル用*/
+/* headerを上部に固定*/
+.header {
+  width: 100%;
+  /* headerのサイズ、、画面の幅を320から767pxになるように指定したい。 */
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  height: 100%;
+}
+
+/*ヘッダーの横幅と左右の余白 */
+.header_inner {
+  width: min(93.6%, 767px);
+  padding: 0 12px;
+}
+
+h1.header_logo {
+  /* color: #333; */
+  text-decoration: none;
+  margin: 0;
+  text-align: center;
+}
+
+#logo {
+  max-width: 240px;
+  height: 20px;
+}
+
+/***********************************/
+/*ハンバーガー　　　               */
+/***********************************/
+.sm {
+  cursor: pointer;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  z-index: 99;
+}
+
+.sm .menu_icon {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  padding-top: 12px;
+  height: 12px;
+}
+
+.sm .menu_icon .navicon {
+  background: #b71b26;
+  display: block;
+  height: 2px;
+  width: 31px;
+  position: relative;
+  transition: background .4s ease-out;
+}
+
+/* 上下二本が×になる */
+.sm .menu_icon .navicon::before,
+.sm .menu_icon .navicon::after {
+  background: #b71b26;
+  content: '';
+  display: block;
+  position: absolute;
+  transition: all .4s ease-out;
+  width: 100%;
+  height: 100%;
+}
+
+.sm .menu_icon .navicon::before {
+  top: 10px;
+}
+
+.sm .menu_icon .navicon::after {
+  top: -10px;
+}
+
+/* 表示されるメニュー */
+/* paddingがbootstrap-rebootの方に入っているので、リセット */
+ul {
+  padding: unset;
+}
+
+.sm .list {
+  background-color: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  max-height: 0;
+  /* ★最初は高さを0にして非表示状態に */
+  transition: max-height .6s;
+  /* 表示されるときのアニメーション */
+  text-align: center;
+  font-family: 'Noto Serif JP';
+  font-size: 1.6rem;
+  font-weight: normal;
+  letter-spacing: 0.12rem;
+  height: 532px;
+  margin: 0;
+}
+
+.sm .list li:first-child {
+  margin-top: 80px;
+}
+
+.sm .list li:last-child {
+  margin-bottom: 132px;
+}
+
+.sm .list li a {
+  display: block;
+  margin-bottom: 48px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.sm .list li a:hover {
+  background-color: #f4f4f4;
+  opacity: 0.3;
+  color: #ffffff;
+}
+
+/* チェックボックスを消す */
+.sm .menu_btn {
+  display: none;
+}
+
+.menu_btn:checked~.list {
+  max-height: 532px;
+  /* ★チェックボックスがオンの時高さを338pxにして表示させます */
+  transition: max-height .6s;
+}
+
+.menu_btn:checked~.menu_icon .navicon {
+  background: transparent;
+}
+
+.menu_btn:checked~.menu_icon .navicon::before {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+.menu_btn:checked~.menu_icon .navicon::after {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+/* PC用ナビを非表示 */
+.pc {
+  display: none;
+}
+
+/*********************************/
+/* 　　　CONCEPTコンセプト　　　　*/
+/********************************/
+.hero {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.hero img {
+  width: 100vw;
+  height: 480px;
+  object-fit: cover;
+  margin: auto;
+  display: block;
+}
+
+/* ********************************************* */
+/* 各セクション */
+/* ********************************************* */
+
+section.consept {
+  margin-top: 48px;
+}
+
+section.flow {
+  background: rgba(34, 62, 105, 5%);
+  margin-top: 80px;
+  margin-bottom: 64px;
+  padding: 16px 0;
+  clear: both;
+  /* .p moreにfloatを指定して右揃えにしているので、floatを解除する必要があるため、clear:both;をセクションに加えました。 */
+}
+
+section.q_and_a {
+  padding: 0;
+  margin: 0 auto;
+}
+
+section.contact {
+  /* #223E69の15％ */
+  background: rgba(34, 62, 105, 15%);
+  width: 100%;
+  padding: 16px 0 24px 0;
+  margin-bottom: 126px;
+}
+
+/* ********************************************* */
+/* hタグ要素 */
+/* ********************************************* */
+
+h2,
+h3,
+h4,
+p {
+  letter-spacing: 0.12rem;
+}
+
+h2 {
+  font-family: 'Noto Serif JP';
+  font-weight: bold;
+  font-size: 2.8rem;
+  text-align: center;
+  margin: 0 0 8px 0;
+}
+
+h3 {
+  font-family: 'Noto Sans JP';
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+h3.servis_h3 {
+  font-family: 'Noto Serif JP';
+  font-weight: 500;
+  font-size: 2rem;
+  text-align: center;
+  margin: 8px 8px 8px 0;
+}
+
+p {
+  font-family: 'Noto Sans JP';
+  font-weight: 400;
+  font-size: 1.4rem;
+  text-align: justify;
+  line-height: 2;
+  margin: 0;
+}
+
+/* コンセプトエリアのリーダー */
+.conce_p {
+  margin-bottom: 80px;
+  margin-left: 12px;
+  margin-right: 12px;
+  letter-spacing: 0.12rem;
+}
+
+/**********h2のサブタイトル***********/
+/* テキストの両脇のライン */
+/************************************/
+.sub_title {
+  width: fit-content;
+  display: block;
+  margin: auto;
+  padding: 0 60.5px 0 60.5px;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  font-family: 'Noto Serif JP';
+  font-weight: 300;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  line-height: 0px;
+  color: #223E69;
+}
+
+.sub_title::before,
+.sub_title::after {
+  content: '';
+  width: 30%;
+  height: 0.8px;
+  background-color: #223E69;
+  position: absolute;
+}
+
+.sub_title::before {
+  top: 0;
+  left: -10px;
+}
+
+.sub_title::after {
+  bottom: 0;
+  right: -10px;
+}
+
+
+/* flowのサブタイトルカラー */
+.sub_red {
+  color: #B71B26;
+}
+
+.sub_red::before,
+.sub_red::after {
+  background-color: #B71B26;
+}
+
+/*********************************/
+/* 　　　SERVICEサービス　　　　　*/
+/********************************/
+
+.servis_area {
+  list-style-type: none;
+}
+
+ul.servis_area {
+  padding: 0;
+  margin: 0 auto;
+}
+
+ul.servis_area li {
+  width: 351px;
+  margin: 0 auto;
+}
+
+p.photo img {
+  width: 351px;
+  
+}
+
+p.more a {
+  float: right;
+  font-family: 'Noto Sans JP';
+  letter-spacing: 0.1rem;
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: #333;
+  padding: 0;
+  margin-bottom: 48px;
+  text-decoration: none;
+}
+
+/* クリップパスを使用して三角を生成 */
+p.more a::after {
+  content: "";
+  display: inline-block;
+  text-align: center;
+  background: #333;
+  height: 9.5px;
+  width: 4.75px;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  white-space: nowrap;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+/* ホバー時に透過*/
+p.more a:hover {
+  text-decoration: none;
+  filter: opacity(0.6);
+}
+
+/***********************************/
+/*          FLOW施工の流れ         */
+/***********************************/
+
+.flow_container {
+  margin: 0 auto;
+  width: 300px;
+}
+
+p.item {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  background-color: #333;
+  border-radius: 50px;
+  color: #ffffff;
+}
+
+p.arrow {
+  text-align: center;
+  width: 0;
+  height: 0;
+  margin: 8px auto;
+  border-style: solid;
+  border-width: 16px 16px 0 16px;
+  border-color: #B71B26 transparent transparent transparent;
+}
+
+/* 三角矢印の透明度　*/
+.color_60 {
+  opacity: 0.6;
+}
+
+.color_70 {
+  opacity: 0.7;
+}
+
+.color_80 {
+  opacity: 0.8;
+}
+
+.color_90 {
+  opacity: 0.9;
+}
+
+/***********************************/
+/* Q&Aよくあるご質問セクション******/
+/***********************************/
+/* bootstrap-reboot.cssにmargin-inlineが指定されていて、
+40pxマージンが左に入っている。margin:0;をddに指定しても
+解除されないので、margin-inline:unsetを指定 */
+dd {
+  margin-inline: unset;
+}
+
+dl.qa_box {
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+dl.qa_box.que dt,
+dl.qa_box.ans dd {}
+
+.que p,
+.ans p {
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+}
+
+.que p {
+  padding: 0px 0px 16px 40px;
+}
+
+.ans p {
+  padding: 0px 0px 16px 40px;
+}
+
+.que::before {
+  content: "Q.";
+  display: flex;
+  float: left;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  border: 7px solid #333;
+  border-radius: 50%;
+  font-family: 'Noto Serif JP';
+  font-size: 1.8rem;
+  font-weight: bold;
+  width: 23.2px;
+  height: 23.2px;
+  clear: both;
+}
+
+.ans::before {
+  content: "A.";
+  display: flex;
+  float: left;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #B71B26;
+  color: #fff;
+  border: 7px solid #B71B26;
+  border-radius: 50%;
+  font-family: 'Noto Serif JP';
+  font-size: 1.8rem;
+  font-weight: bold;
+  width: 23.2px;
+  height: 23.2px;
+  clear: both;
+}
+
+/***********************************/
+/*  contact フォームのセクション    */
+/***********************************/
+.cont_table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: flex;
+  justify-content: center;
+  /* テーブル全体を中央寄せ */
+}
+
+/* trの下にthとtdを配置、float:leftでモバイル版は縦積みデザインに */
+.cont_table th,
+.cont_table td {
+  width: 100%;
+  display: block;
+  justify-content: center;
+}
+
+.cont_table th {
+  padding-bottom: 8px;
+}
+
+.cont_table td {
+  width: 100%;
+  padding-bottom: 24px;
+}
+
+/* フォームの入力部分 */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  /* display: block; */
+  background-color: #ffffff;
+  width: 100%;
+  border: none;
+  height: 30px;
+  /* 高さは32pxだが、上下にpaddingで
+  1px入っているので高さは30px */
+}
+
+/*郵便マークの右側を4px空ける*/
+#postal_code {
+  margin-left: 4px;
+}
+
+/* 郵便番号 */
+p.post {
+  display: flex;
+  justify-content: left;
+  width: 125px;
+  padding-bottom: 0;
+  margin: 0 8px 8px 0px;
+}
+
+/* 住所 */
+p.add {
+  width: 351px;
+}
+
+/* 問い合わせ内容の欄のサイズ */
+.message_size {
+  height: 120px;
+}
+
+p.hissu {
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+p.request {
+  width: 186px;
+  text-align: justify;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* お問い合わせ内容 */
+p.no_hissu {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/**入力内容を確認するボタン**********/
+/* ※メモ：input要素には疑似要素beforeやafterは効かない. */
+/* buttonタグのスタイルをCSSで打ち消す */
+button {
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* 親要素で中央寄せにする */
+.sub_bt {
+  text-align: center;
+}
+
+/* afterで三角を加える */
+.submit_button {
+  width: 200px;
+  font-size: 1.6rem;
+  font-family: 'Noto Serif JP';
+  font-weight: 200;
+  letter-spacing: 0.12rem;
+  background-color: #333;
+  color: #ffffff;
+  padding: 12.4px 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.submit_button::after {
+  content: "";
+  display: inline-block;
+  text-align: center;
+  background: #fff;
+  height: 12px;
+  width: 6px;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  white-space: nowrap;
+  margin-left: 3px;
+}
+
+.submit_button:hover{
+  text-decoration: none;
+  filter: opacity(0.6);
+}
+
+/**フォームの項目の必須のアイコン*****/
+.hissu {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.hissu::after {
+  content: "必須";
+  background-color: #B71B26;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.12rem;
+  width: 40px;
+  height: 14px;
+  padding: 4px 0 0 0;
+  margin-left: 4px;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+/***********************************/
+/*  footer フッターのセクション　   */
+/***********************************/
+/* footer */
+
+/* footer pの親要素でp要素上下中央寄せ */
+footer {
+  background-color: #333;
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+/* p要素自身は左右中央揃え */
+footer p {
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+/***********************************/
+/*  ページトップへ戻るボタン　　　   */
+/***********************************/
+
+a.pagetop {
+  clear: both;
+  height: 46px;
+  width: 46px;
+  position: fixed;
+  right: 30px;
+  bottom: 45px;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+a.pagetop::before {
+  content: "";
+  height: 15px;
+  width: 15px;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  transform: translateY(20%) rotate(-45deg);
+}
+
+a.pagetop:hover {
+  text-decoration: none;
+  filter: opacity(0.6);
+}
+
+a.pagetop::before:hover {
+  text-decoration: none;
+  filter: opacity(0.6);
+}
+
+/* **************************************************/
+/* (768px以上 : PCデザインで可変サイズ) **************/
+/* **************************************************/
+@media screen and (min-width:768px) {
+
+  .body {
+    width: auto;
+  }
+
+  .body_inner {
+    margin: 0 auto;
+    padding:0 ;
+    /* overflow: hidden; */
+  }
+
+  /***********************************/
+  /*  header */
+  /***********************************/
+  .header {
+    display: block;
+    margin: 0 auto;
+    background-color: #ffffff;
+    position: unset;
+  }
+
+  .header_container.header_inner {
+    width: 100%;
+  }
+
+  /*ヘッダーの横幅と左右の余白 */
+  .header_inner {
+    width: 100%;
+    margin: 24px 0;
+    padding: 0;
+  }
+
+  #logo {
+    max-width: 29.28vw;
+    height: 5.89vw;
+    margin-left: 24px;
+  }
+
+  /***********************************/
+  /***PC用リスト***/
+  /***********************************/
+
+  /* モバイル用ナビゲーションを非表示にして、PC用を表示させる */
+  .sm {
+    display: none;
+  }
+
+  .pc {
+    display: unset;
+    width: auto;
+  }
+
+  /* リスト */
+  .pc ul.list {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    font-family: 'Noto Serif JP';
+    font-size: clamp(1.2rem, 1.17vw, 1.6rem);
+    font-weight: normal;
+    letter-spacing: 0.12rem;
+    padding-right: 24px;
+  }
+
+  .pc .list li a {
+    color: #333;
+    display: block;
+    margin-right: 0px;
+    text-decoration: none;
+    padding-left: 2.92vw;
+  }
+
+  /* ホバー時に透過*/
+  .pc .list li a:hover {
+    filter: opacity(0.6);
+  }
+
+  /*********************************/
+  /* CONCEPTコンセプト*/
+  /********************************/
+  /* hero画像はCONCEPT　section
+ */
+  .hero {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 160px;
+  
+  }
+
+  .hero img {
+    width: 100%;
+    height: 545px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: inline-block;
+  }
+
+
+  /* width:1020px,height:473; */
+  section.consept {
+    max-width: 1020px;
+    height: 473px;
+    padding: 0 12px;
+  }
+
+  h2 {
+    font-family: 'Noto Serif JP';
+    font-weight: bold;
+    font-size: 4.8rem;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    margin: 0 0 8px 0;
+  }
+
+  h3 {
+    font-size: 2.8rem;
+    text-align: center;
+  }
+
+  h3.servis_h3 {
+    font-family: 'Noto Serif JP';
+    font-weight: 500;
+    font-size: 2.4rem;
+    text-align: center;
+    margin: 8px 8px 8px 0;
+  }
+
+  p {
+    font-family: 'Noto Sans JP';
+    font-weight: 400;
+    font-size: 1.6rem;
+    text-align: justify;
+    line-height: 2;
+    margin: 0;
+  }
+
+  .sub_title {
+    margin-bottom: 48px;
+    font-size: 1.6rem;
+  }
+
+  /* コンセプトエリアのリーダー */
+  .conce_p {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 12px;
+    letter-spacing: 0.1rem;
+    margin-bottom: 160px;
+  }
+
+  /*********************************/
+  /* 　　　SERVICEサービス　　　　　*/
+  /********************************/
+  section.service {
+    max-width: 74.6vw;
+    margin: 0 auto;
+    margin-bottom: 160px;
+  }
+
+  /* width 1020px */
+  .servis_area_wrap {
+    display: flex;
+    justify-content: center;
+    width:74.6vw;
+  }
+  
+/* イメージの横幅をvwで指定 */
+  p.photo img {
+    max-width: 29.4vw;
+  }
+/* flexにしてgapで行と列のサイズを指定 */
+  ul.servis_area {
+    width: 1020px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    gap:0px 5.88vw;
+    justify-content: center;
+
+  }
+/* イメージの横幅をvwで指定 */
+  ul.servis_area li {
+    width: 29.4vw;
+    height: 351px;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+
+  p.more {
+    font-size: 1.6rem;
+  }
+
+
+  /***********************************/
+  /*  flow 施工の流れセクション　    */
+  /***********************************/
+  /* 910px  40 40px*/
+  .flow_container {
+    display: flex;
+    justify-content: center;
+    max-width: 66.6%;
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+
+  section.flow {
+    background: rgba(34, 62, 105, 5%);
+  }
+
+  /* height280px */
+  p.item {
+    writing-mode: vertical-rl;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2.8rem;
+    font-weight: 400;
+    background-color: #333;
+    border-radius: 50px;
+    color: #ffffff;
+    padding: 0;
+    height: 280px;
+    align-items: center;
+  }
+/* marginにvw指定することで余白を可変 */
+  p.arrow {
+    display: inline-block;
+    vertical-align: middle;
+    align-self: center;
+    color: #B71B26;
+    line-height: 1;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 30px 30px;
+    border-left-color: currentColor;
+    border-right: 0;
+    margin: 2.928vw;
+  }
+
+  /***********************************/
+  /* 　　　 Q&Aよくあるご質問　      */
+  /***********************************/
+  section.q_and_a {
+    max-width: 988px;
+    padding: 0 12px;
+    margin: 0 auto;
+  }
+
+  dl.qa_box {
+    max-width: 988px;
+    margin-bottom: 112px;
+  }
+
+  .ans p {
+    padding: 0px 0px 48px 40px;
+  }
+
+  /***********************************/
+  /*  contact フォームのセクション(pc) */
+  /***********************************/
+  section.contact {
+    width: 100%;
+    background-color: rgba(34, 62, 105, 15%);
+    padding: 48px 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cont_table {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 50%);
+    padding: 48px 0;
+    margin: auto;
+    display: flex;
+    /* テーブル全体を中央寄せ */
+  }
+
+  .cont_table tr {
+    display: flex;
+    width:100%;
+  }
+
+  .cont_table th {
+    width: 30%;
+    display: inline;
+    vertical-align: top;
+  }
+
+  .cont_table td {
+    display: inline;
+    width: 70%;
+  }
+
+  .cont_table tr:last-of-type {
+    justify-content: center;
+  }
+
+  /* お問い合わせ種別*/
+  p.request.inquiry_type {
+    width: 30rem;
+    text-align: left;
+  }
+
+  /* お問い合わせ種別のフォントサイズ */
+  .toi {
+    text-align: left;
+    margin-right: 40px;
+    font-size: 2rem;
+  }
+
+  p.hissu,
+  .request {
+    font-size: 2rem;
+    text-align: right;
+    margin-right: 12px;
+  }
+
+  /* お問い合わせ内容 */
+  p.no_hissu {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 12px;
+  }
+/* width:236px; */
+  p.post {
+    width: 23.3vw;
+    padding: 0 0 0 12px;
+  }
+
+  /* フォームの入力部分  width664px*/
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    font-size: 2rem;
+    width: 40vw;
+    height: 50px;
+  }
+/* .i_width{
+  width: 60rem;
+} */
+
+  section.contact {
+    margin-bottom: 219px;
+  }
+
+  /**フォームの項目の必須のアイコンPC用*****/
+  p.hissu,
+  .request {
+    font-size: 2rem;
+    text-align: right;
+    margin-right: 12px;
+  }
+
+  .hissu::after {
+    content: "必須";
+    background-color: #B71B26;
+    color: #fff;
+    font-size: 1.6rem;
+    letter-spacing: 0.12rem;
+    width: 47px;
+    height: 20px;
+    padding: 4px 0 0 0;
+    margin-left: 4px;
+    line-height: 1;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
+  /***********************************/
+  /*  footer フッターのセクション　   */
+  /***********************************/
+
+
+  footer {
+    background-color: #333;
+    width: auto;
+  }
+
+  /* PC版のフッターの高さは32px。パディングでサイズを32pxに */
+  footer p {
+    color: #ffffff;
+    font-size: 1.6rem;
+    padding: 17px;
+  }
+
+  /***********************************/
+  /*  ページトップへ戻るボタン　　　   */
+  /***********************************/
+  .pagetop {
+    clear: both;
+    height: 60px;
+    width: 60px;
+    position: fixed;
+    right: 30px;
+    bottom: 45px;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .pagetop::before {
+    content: "";
+    height: 20px;
+    width: 20px;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+    transform: translateY(20%) rotate(-45deg);
+  }
+
+}
